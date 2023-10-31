@@ -14,5 +14,5 @@
 }
 
 .icon {
-    color: white;
+    color: var(--color-text-primary);
 }

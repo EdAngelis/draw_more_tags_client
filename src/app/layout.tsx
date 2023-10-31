@@ -13,15 +13,12 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-  sidebar,
 }: {
   children: React.ReactNode;
-  sidebar: React.ReactNode;
 }) {
   return (
     <html lang="en">
       <body className={`${inter.className} ${style.container}`}>
-        <Sidebar />
         {children}
       </body>
     </html>

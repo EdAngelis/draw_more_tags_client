@@ -4,8 +4,7 @@ import React from "react";
 export default function SignUp() {
   return (
     <>
-      <div>Sign Up Page</div>
-      <Link href="/pages/user/login">Go to Sign In Page</Link>
+      <div>USERS</div>
     </>
   );
 }

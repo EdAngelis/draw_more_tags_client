@@ -1,16 +1,21 @@
 "use client";
-import React from "react";
-import Link from "next/link";
+import React, { useEffect, useContext } from "react";
+import { userContext } from "@/providers/user.provider";
+import { useRouter } from "next/navigation";
 import style from "./login.module.css";
 import { Input } from "../../../components";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { BiSolidUser } from "react-icons/bi";
 import { RiLockPasswordFill } from "react-icons/ri";
+import { signIn } from "../user.service";
+import { User } from "@/models";
 
 import * as yup from "yup";
 
 export default function SignIn() {
+  const { user, setUser } = useContext(userContext);
+  const router = useRouter();
   const schema = yup.object().shape({
     email: yup.string().email().required("email is required"),
     password: yup.string().required("password is required"),
@@ -24,9 +29,28 @@ export default function SignIn() {
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = (data: any) => {
-    console.log(data);
+  useEffect(() => {
+    localStorage.removeItem("user");
+  }, []);
+
+  const fetchUsers = async (user: User) => {
+    const resp = await signIn(user);
+
+    return resp;
   };
+
+  const onSubmit = async (data: User) => {
+    const user = await fetchUsers({
+      email: "info@drawmoretags.com",
+      password: "@drawmoretags.admin123",
+    });
+    if (user.data.email) {
+      localStorage.setItem("user", JSON.stringify(user.data.email));
+      setUser(user.data.email);
+      router.push("/");
+    }
+  };
+
   return (
     <>
       <div className={style.container}>
