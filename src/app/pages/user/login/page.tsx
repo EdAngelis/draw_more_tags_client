@@ -5,6 +5,9 @@ import style from "./login.module.css";
 import { Input } from "../../../components";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { BiSolidUser } from "react-icons/bi";
+import { RiLockPasswordFill } from "react-icons/ri";
+
 import * as yup from "yup";
 
 export default function SignIn() {
@@ -28,24 +31,29 @@ export default function SignIn() {
     <>
       <div className={style.container}>
         <div className={style.card}>
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <div>Sign In Page</div>
+          <form className={style.form} onSubmit={handleSubmit(onSubmit)}>
+            <div className={style.title}>Login</div>
             <Input
-              label="E-mail"
+              label=""
               name="email"
+              placeholder="E-mail"
+              icon={<BiSolidUser />}
               onChange={(value) => setValue("email", value)}
               error={errors.email?.message || null}
             />
 
             <Input
               password={true}
-              label="Password"
+              label=""
               name="password"
+              placeholder="Password"
+              icon={<RiLockPasswordFill />}
               onChange={(value) => setValue("password", value)}
               error={errors.password?.message || null}
             />
-            <Link href="/pages/user/manager">Go to Sign Up Page</Link>
-            <button type="submit">Submit</button>
+            <button className={style.button} type="submit">
+              Login
+            </button>
           </form>
         </div>
       </div>
