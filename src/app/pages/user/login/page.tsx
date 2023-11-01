@@ -40,11 +40,9 @@ export default function SignIn() {
   };
 
   const onSubmit = async (data: User) => {
-    const user = await fetchUsers({
-      email: "info@drawmoretags.com",
-      password: "@drawmoretags.admin123",
-    });
-    if (user.data.email) {
+    const user = await fetchUsers(data);
+    console.log(user);
+    if (user?.data?.email) {
       localStorage.setItem("user", JSON.stringify(user.data.email));
       setUser(user.data.email);
       router.push("/");

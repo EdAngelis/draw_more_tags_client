@@ -6,8 +6,10 @@ import Sidebar from "../components/sidebar/sidebar";
 export default function layout({ children }: { children: React.ReactNode }) {
   return (
     <UserProvider>
-      <Sidebar />
-      <div className={style.layout}>{children}</div>;
+      <div className={style.layout}>
+        <Sidebar />
+        <div>{children}</div>;
+      </div>
     </UserProvider>
   );
 }
