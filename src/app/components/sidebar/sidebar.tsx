@@ -13,10 +13,6 @@ export default function Sidebar() {
   const { user, setUser } = useContext(userContext);
   const router = useRouter();
 
-  useEffect(() => {
-    console.log("user", user);
-  }, [user]);
-
   const menu = [
     {
       name: "Home",
@@ -49,16 +45,18 @@ export default function Sidebar() {
     <div className={style.container}>
       <div className={style.top}></div>
       <nav>
-        <ul className={style.nav}>
-          {menu.map((item) => (
-            <li className={style.menuItem} key={item.path}>
-              <Link href={item.path}>
-                {item.icon && <span className={style.icon}>{item.icon}</span>}
-                <span className={style.name}>{item.name}</span>
-              </Link>
-            </li>
-          ))}
-        </ul>
+        {user && (
+          <ul className={style.nav}>
+            {menu.map((item) => (
+              <li className={style.menuItem} key={item.path}>
+                <Link href={item.path}>
+                  {item.icon && <span className={style.icon}>{item.icon}</span>}
+                  <span className={style.name}>{item.name}</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        )}
       </nav>
       <footer>
         <div className={`${style.menuItem} ${style.white}`}>
