@@ -31,7 +31,7 @@ export default function Sidebar() {
     },
     {
       name: "Users",
-      path: "/pages/user/manage",
+      path: "/pages/user",
       icon: <FaHandsHelping />,
     },
   ];

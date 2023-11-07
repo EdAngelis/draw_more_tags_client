@@ -13,7 +13,7 @@ interface InputProps {
   onChange: (value: string) => void;
 }
 
-const Input: React.FC<InputProps> = ({
+export default function Input({
   label,
   value,
   name,
@@ -22,7 +22,7 @@ const Input: React.FC<InputProps> = ({
   placeholder,
   icon,
   onChange,
-}) => {
+}: InputProps) {
   const [showPassword, setShowPassword] = useState(true);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -42,16 +42,18 @@ const Input: React.FC<InputProps> = ({
         <div className={style.inputRow}>
           <div className={style.icon}>
             {!password ? (
-              icon
-            ) : showPassword ? (
-              <div onClick={toggleShowPassword}>
-                <AiFillEye />
-              </div>
-            ) : (
-              <div onClick={toggleShowPassword}>
-                <AiFillEyeInvisible />
-              </div>
-            )}
+              icon ? (
+                showPassword ? (
+                  <div onClick={toggleShowPassword}>
+                    <AiFillEye />
+                  </div>
+                ) : (
+                  <div onClick={toggleShowPassword}>
+                    <AiFillEyeInvisible />
+                  </div>
+                )
+              ) : null
+            ) : null}
           </div>
           <input
             className={style.input}
@@ -67,6 +69,4 @@ const Input: React.FC<InputProps> = ({
       </div>
     </div>
   );
-};
-
-export default Input;
+}
