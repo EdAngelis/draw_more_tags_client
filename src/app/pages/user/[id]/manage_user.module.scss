@@ -1,0 +1,47 @@
+.form {
+    display: grid;
+    grid-template-columns: 500px;
+    margin: 50px;
+    gap: 20px;
+}
+
+.title {
+    font-size: 30px;
+    font-weight: bold;
+    margin: 50px;
+}
+
+.actions {
+    display: flex;
+    justify-content: space-between;
+    margin: 50px;
+}
+
+.actions button {
+    width: 150px;
+    height: 50px;
+    color: black;
+    border-radius: 10px;
+    border: none;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.actions button:hover {
+    background-color: #e6e6e6;
+}
+
+.actions a {
+    padding: 13.2px 40px;
+    color: var(--color-text-primary);
+    border-radius: 10px;
+    border: var(--color-text-primary) 2px solid;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.actions a:hover {
+    background-color: rgb(255, 255, 255, 0.1);
+    color: white;
+}

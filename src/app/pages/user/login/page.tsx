@@ -41,7 +41,6 @@ export default function SignIn() {
 
   const onSubmit = async (data: User) => {
     const user = await fetchUsers(data);
-    console.log(user);
     if (user?.data?.email) {
       localStorage.setItem("user", JSON.stringify(user.data.email));
       setUser(user.data.email);
@@ -51,33 +50,31 @@ export default function SignIn() {
 
   return (
     <>
-      <div className={style.container}>
-        <div className={style.card}>
-          <form className={style.form} onSubmit={handleSubmit(onSubmit)}>
-            <div className={style.title}>Login</div>
-            <Input
-              label=""
-              name="email"
-              placeholder="E-mail"
-              icon={<BiSolidUser />}
-              onChange={(value) => setValue("email", value)}
-              error={errors.email?.message || null}
-            />
+      <div className={style.card}>
+        <form className={style.form} onSubmit={handleSubmit(onSubmit)}>
+          <div className={style.title}>Login</div>
+          <Input
+            label=""
+            name="email"
+            placeholder="E-mail"
+            icon={<BiSolidUser />}
+            onChange={(value) => setValue("email", value)}
+            error={errors.email?.message || null}
+          />
 
-            <Input
-              password={true}
-              label=""
-              name="password"
-              placeholder="Password"
-              icon={<RiLockPasswordFill />}
-              onChange={(value) => setValue("password", value)}
-              error={errors.password?.message || null}
-            />
-            <button className={style.button} type="submit">
-              Login
-            </button>
-          </form>
-        </div>
+          <Input
+            password={true}
+            label=""
+            name="password"
+            placeholder="Password"
+            icon={<RiLockPasswordFill />}
+            onChange={(value) => setValue("password", value)}
+            error={errors.password?.message || null}
+          />
+          <button className={style.button} type="submit">
+            Login
+          </button>
+        </form>
       </div>
     </>
   );

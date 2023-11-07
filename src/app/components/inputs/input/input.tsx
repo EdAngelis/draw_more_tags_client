@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import style from "./input.module.css";
+import { UseFormRegister, FieldValues } from "react-hook-form";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 
 interface InputProps {
@@ -8,8 +9,10 @@ interface InputProps {
   name: string;
   password?: boolean;
   placeholder?: string;
+  type?: string;
   error?: string | null;
   icon?: React.ReactNode;
+  register?: UseFormRegister<FieldValues>;
   onChange: (value: string) => void;
 }
 
@@ -21,9 +24,11 @@ export default function Input({
   error = null,
   placeholder,
   icon,
+  type = "text",
   onChange,
+  register,
 }: InputProps) {
-  const [showPassword, setShowPassword] = useState(true);
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     onChange(event.target.value);
@@ -36,31 +41,30 @@ export default function Input({
   return (
     <div>
       <div>
-        <div>
-          <label htmlFor={name}>{label}</label>
-        </div>
+        <div></div>
         <div className={style.inputRow}>
           <div className={style.icon}>
             {!password ? (
               icon ? (
-                showPassword ? (
-                  <div onClick={toggleShowPassword}>
-                    <AiFillEye />
-                  </div>
-                ) : (
-                  <div onClick={toggleShowPassword}>
-                    <AiFillEyeInvisible />
-                  </div>
-                )
+                icon
               ) : null
-            ) : null}
+            ) : showPassword ? (
+              <div onClick={toggleShowPassword}>
+                <AiFillEye />
+              </div>
+            ) : (
+              <div onClick={toggleShowPassword}>
+                <AiFillEyeInvisible />
+              </div>
+            )}
           </div>
+          <label htmlFor={name}></label>
           <input
             className={style.input}
             id={name}
             name={name}
             placeholder={placeholder}
-            type={showPassword ? "text" : "password"}
+            type={password ? (showPassword ? "text" : "password") : type}
             value={value}
             onChange={handleInputChange}
           />
