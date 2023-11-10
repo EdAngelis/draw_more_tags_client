@@ -69,7 +69,7 @@ export default function Input({
             onChange={handleInputChange}
           />
         </div>
-        <div>{error && <p>{error}</p>}</div>
+        <div className={style.error}>{error && <p>{error}</p>}</div>
       </div>
     </div>
   );

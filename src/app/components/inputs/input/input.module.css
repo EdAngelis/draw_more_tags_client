@@ -17,3 +17,15 @@
 .icon {
     color: var(--color-text-primary);
 }
+
+.error {
+    display: flex;
+    height: 50px;
+    justify-content: center;
+    align-items: center;
+}
+
+.error p {
+    color: var(--error);
+    font-weight: 200;
+}

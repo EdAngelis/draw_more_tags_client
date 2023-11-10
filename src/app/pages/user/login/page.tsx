@@ -1,9 +1,9 @@
 "use client";
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import { userContext } from "@/providers/user.provider";
 import { useRouter } from "next/navigation";
 import style from "./login.module.css";
-import { Input } from "../../../components";
+import { Input, Toast } from "../../../components";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { BiSolidUser } from "react-icons/bi";
@@ -15,6 +15,8 @@ import * as yup from "yup";
 
 export default function SignIn() {
   const { user, setUser } = useContext(userContext);
+  const [loginMessage, setLoginMessage] = useState<string>("Invalid User");
+  const [showToast, setShowToast] = React.useState<boolean>(false);
   const router = useRouter();
   const schema = yup.object().shape({
     email: yup.string().email().required("email is required"),
@@ -40,11 +42,16 @@ export default function SignIn() {
   };
 
   const onSubmit = async (data: User) => {
-    const user = await fetchUsers(data);
-    if (user?.data?.email) {
-      localStorage.setItem("user", JSON.stringify(user.data.email));
-      setUser(user.data.email);
+    setShowToast(false);
+    const resp = await fetchUsers(data);
+    console.log(resp);
+    if (resp?.data?.email) {
+      localStorage.setItem("user", JSON.stringify(resp.data.email));
+      setUser(resp.data.email);
       router.push("/");
+    } else {
+      setLoginMessage(resp.message);
+      setShowToast(true);
     }
   };
 
@@ -71,6 +78,7 @@ export default function SignIn() {
             onChange={(value) => setValue("password", value)}
             error={errors.password?.message || null}
           />
+          <Toast message={loginMessage} active={showToast} />
           <button className={style.button} type="submit">
             Login
           </button>

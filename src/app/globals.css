@@ -5,6 +5,7 @@
   --color-text-primary: #ffffff;
   --background-white: #ffffff;
   --background-dark: #000000;
+  --error: #ff0000;
 }
 
 * {
