@@ -14,7 +14,7 @@ import { User } from "@/models";
 import * as yup from "yup";
 
 export default function SignIn() {
-  const { user, setUser } = useContext(userContext);
+  const { setUser } = useContext(userContext);
   const [loginMessage, setLoginMessage] = useState<string>("Invalid User");
   const [showToast, setShowToast] = React.useState<boolean>(false);
   const router = useRouter();

@@ -56,7 +56,6 @@ export default function ManageUser({ params }: { params: { id: string } }) {
   return (
     <>
       <div className={style.container}>
-        <div className={style.title}>Register User</div>
         <form className={style.form} onSubmit={handleSubmit(onSubmit)}>
           <Input
             label="Name"

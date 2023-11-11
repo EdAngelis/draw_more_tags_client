@@ -2,6 +2,14 @@
     display: grid;
     grid-template-columns: 1fr;
     gap: 50px;
+    margin-top: 100px;
+
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, .5);
+    border-radius: 20px;
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px); 
+    box-shadow: 0 0 30px rgba(0, 0, 0, .5);
 }
 
 .deleteIcon {
@@ -19,11 +27,17 @@
 .top a {
     text-decoration: none;
     padding: 10px 20px;
-    color: gray;
-    border: 1px solid gray;
-    border-radius: 10px;
-    font-size: 20px;
-    font-weight: 700;
+
+    height: 45px;
+    background: #162938;
+    border: none;
+    outline: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1em;
+    color: #fff;
+    font-weight: 5
+    00;
 }
 
 .tr:nth-child(even) {
@@ -31,6 +45,6 @@
 }
 
 .td {
-    padding: 10px 50px;
+    padding: 10px 10px;
     font-size: 20px;
 }
