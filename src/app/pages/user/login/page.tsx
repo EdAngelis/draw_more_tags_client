@@ -3,7 +3,7 @@ import React, { useEffect, useContext, useState } from "react";
 import { userContext } from "@/providers/user.provider";
 import { useRouter } from "next/navigation";
 import style from "./login.module.css";
-import { Input, Toast } from "../../../components";
+import { Input, Toast, Loading, Button } from "../../../components";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { BiSolidUser } from "react-icons/bi";
@@ -17,6 +17,7 @@ export default function SignIn() {
   const { setUser } = useContext(userContext);
   const [loginMessage, setLoginMessage] = useState<string>("Invalid User");
   const [showToast, setShowToast] = React.useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const router = useRouter();
   const schema = yup.object().shape({
     email: yup.string().email().required("email is required"),
@@ -43,6 +44,7 @@ export default function SignIn() {
 
   const onSubmit = async (data: User) => {
     setShowToast(false);
+    setLoading(true);
     const resp = await fetchUsers(data);
     console.log(resp);
     if (resp?.data?.email) {
@@ -50,6 +52,7 @@ export default function SignIn() {
       setUser(resp.data.email);
       router.push("/");
     } else {
+      setLoading(false);
       setLoginMessage(resp.message);
       setShowToast(true);
     }
@@ -58,7 +61,11 @@ export default function SignIn() {
   return (
     <>
       <div className={style.card}>
-        <form className={style.form} onSubmit={handleSubmit(onSubmit)}>
+        <form
+          id="signIn"
+          className={style.form}
+          onSubmit={handleSubmit(onSubmit)}
+        >
           <div className={style.title}>Login</div>
           <Input
             label=""
@@ -68,7 +75,6 @@ export default function SignIn() {
             onChange={(value) => setValue("email", value)}
             error={errors.email?.message || null}
           />
-
           <Input
             password={true}
             label=""
@@ -79,9 +85,10 @@ export default function SignIn() {
             error={errors.password?.message || null}
           />
           <Toast message={loginMessage} active={showToast} />
-          <button className={style.button} type="submit">
-            Login
-          </button>
+          {loading && <Loading />}
+          <Button type="submit">
+            <span>Sign In</span>
+          </Button>
         </form>
       </div>
     </>
